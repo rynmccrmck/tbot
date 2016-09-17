@@ -49,7 +49,7 @@ def webhook():
                             send_message(sender_id, "Welcome to T.Bot! We're here to help you find resources you need.  Type 'Start' to start or 'Restart' to start over")
 			    cache[str(sender_id)] = 0	
 			else:
-		            send_message(sender_id, "Question 1")		
+		            send_quick_reply(sender_id, "Question 1")		
 		    except:
 			send_message(sender_id, str(entry))
 
@@ -88,6 +88,36 @@ def send_message(recipient_id, message_text):
         log(r.status_code)
         log(r.text)
 
+def send_quick_reply(recipient_id, message_text):
+    log("sending message to {recipient}: {text}".format(recipient=recipient_id, text=message_text))
+    params = {
+        "access_token": os.environ["PAGE_ACCESS_TOKEN"]
+    }
+    headers = {
+        "Content-Type": "application/json"
+    }
+    data = json.dumps({
+        "recipient": {
+            "id": recipient_id
+        },
+        "message": {
+            "text": message_text,
+             "quick_replies":[
+      {
+        "content_type":"text",
+        "title":"Red",
+        "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_RED",
+        "image_url":"http://petersfantastichats.com/img/red.png"
+      },
+      {
+        "content_type":"text",
+        "title":"Green",
+        "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_GREEN",
+        "image_url":"http://petersfantastichats.com/img/green.png"
+      }
+    ]
+        }
+    })
 
 def log(message):  # simple wrapper for logging to stdout on heroku
     print str(message)
