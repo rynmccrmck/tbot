@@ -2,6 +2,7 @@ import os
 import sys
 import json
 import pylru
+import time
 
 import requests
 from flask import Flask, request
@@ -47,14 +48,18 @@ def webhook():
 		    try:	
 		        if str(sender_id) not in cache.keys():
 			    cache[str(sender_id)] = 0	
+			    time.sleep(2)
                             send_message(sender_id, welcome)
 			elif message_text.lower() == "restart":
 			    cache[sender_id] = 0	
+			    time.sleep(2)
 			    send_message(sender_id,welcome)
 			elif cache[str(sender_id)] == 0:
 			    cache[str(sender_id)] = 1	
+		    	    time.sleep(2)
 		            send_quick_reply(sender_id, "How are you feeling?")	
 			elif cache[str(sender_id)] == 1:
+			    cache[str(sender_id)] == 2
 			    log(message_text)
 			    if message_text.lower() == "calm":
 				send_message(sender_id,"Get a coffee maybe")
