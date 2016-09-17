@@ -1,11 +1,17 @@
 import os
 import sys
 import json
+import pylru
 
 import requests
 from flask import Flask, request
 
 app = Flask(__name__)
+
+
+
+size = 100
+cache = pylru.lrucache(size)
 
 
 @app.route('/', methods=['GET'])
@@ -39,7 +45,8 @@ def webhook():
                     recipient_id = messaging_event["recipient"]["id"]  # the recipient's ID, which should be your page's facebook ID
                     message_text = messaging_event["message"]["text"]  # the message's text	
 		    try:	
-                        send_message(sender_id, "Test message: " + str(messaging_event["message"]["id"]) )
+		        if str("sender_id") not in cache.keys():
+                            send_message(sender_id, "Welcome to T.Bot! We're here to help you find resources you need.  Type 'Start' to start or 'Restart' to start over") )
 		    except:
 			send_message(sender_id, str(entry))
 
