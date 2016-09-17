@@ -105,15 +105,15 @@ def send_quick_reply(recipient_id, message_text):
              "quick_replies":[
       {
         "content_type":"text",
-        "title":"Red",
+        "title":"Crazy",
         "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_RED",
-        "image_url":"http://petersfantastichats.com/img/red.png"
+        "image_url":"https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcR5TWbk5DmxpPUfNNCsAxstPfzRm3yJStFx1QC7pvP2wiZ5EmtXDh5Aiw"
       },
       {
         "content_type":"text",
-        "title":"Green",
+        "title":"Calm",
         "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_GREEN",
-        "image_url":"http://petersfantastichats.com/img/green.png"
+        "image_url":"https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcSEbkZszcbchKY9Z4gqIX8WFHATnsVNoP-ZdrWYTQ4kIY9vl7Ww"
       }
     ]
         }
