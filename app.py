@@ -165,7 +165,7 @@ def send_quick_reply(recipient_id, message_text,quick_replies):
         },
         "message": {
             "text": message_text,
-             "quick_replies":
+             "quick_replies": quick_replies
         }
     })
     r = requests.post("https://graph.facebook.com/v2.6/me/messages", params=params, headers=headers, data=data)
