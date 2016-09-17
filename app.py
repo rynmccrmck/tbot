@@ -30,7 +30,7 @@ def verify():
 def webhook():
 
     # endpoint for processing incoming messaging events
-
+    welcome = "Welcome to T.Bot! We're here to help you find resources you need.  Type 'Start' to start or 'Restart' to start over"
     data = request.get_json()
     log(data)  # you may not want to log every incoming message in production, but it's good for testing
 
@@ -46,11 +46,14 @@ def webhook():
                     message_text = messaging_event["message"]["text"]  # the message's text	
 		    try:	
 		        if str(sender_id) not in cache.keys():
-                            send_message(sender_id, "Welcome to T.Bot! We're here to help you find resources you need.  Type 'Start' to start or 'Restart' to start over")
 			    cache[str(sender_id)] = 0	
+                            send_message(sender_id, welcome)
+			elif message_text.lower() == "restart":
+			    cache[sender_id] = 0	
+			    send_message(sender_id,welcome)
 			elif cache[str(sender_id)] == 0:
+			    cache[str(sender_id)] = 1	
 		            send_quick_reply(sender_id, "How are you feeling?")	
-			    cache[str(sender_id)] = 1
 			elif cache[str(sender_id)] == 1:
 			    log(message_text)
 			    if message_text.lower() == "calm":
