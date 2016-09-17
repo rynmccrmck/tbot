@@ -30,8 +30,7 @@ def webhook():
     welcome = "Welcome to T.Bot! We're here to help you find resources you need.  Type 'Start' to start or 'Restart' to start over"
     data = request.get_json()
     log(data)  # you may not want to log every incoming message in production, but it's good for testing
-        
-	
+        	
     if data["object"] == "page":
 
         for entry in data["entry"]:
@@ -51,15 +50,15 @@ def webhook():
 		        if str(sender_id) not in cache.keys():
 			    cache[sender_id] = {"state":0}
 			    time.sleep(2)
-                            send_message(sender_id, welcome + state)
+                            send_message(sender_id, welcome)
 			elif message_text.lower() == "restart":
 			    cache[sender_id]["state"] = 0
 			    time.sleep(2)
-			    send_message(sender_id,welcome + state)
+			    send_message(sender_id,welcome)
 			elif cache[sender_id]['state'] == 0:
 			    cache[sender_id]['state'] = 1
 		    	    time.sleep(2)
-		            send_quick_reply(sender_id, "What is your age group?" + state, youth_replies)	
+		            send_quick_reply(sender_id, "Are you under 30?" + state, youth_replies)	
 			elif cache[sender_id]['state'] == 1:
 			    cache[sender_id]['state'] == 2
 			    log(message_text)
@@ -73,7 +72,8 @@ def webhook():
 				send_message(sender_id, "hmm.. " + state)
 			elif cache[sender_id]['state'] == 2:
 			    cache['sender_id']['state'] == 3
-			    send_quick_reply(sender_id,"What  gender do you identify with?", gender_replies)	
+			    send_message(sender_id,"Are you a member of the First Nations?")	
+			elif 
 			else:
 			    send_message(sender_id,str(cache[sender_id]))
 		    except Exception as e:
@@ -90,6 +90,7 @@ def webhook():
 
     return "ok", 200
 
+#age,gender,
 
 def send_message(recipient_id, message_text):
     log("sending message to {recipient}: {text}".format(recipient=recipient_id, text=message_text))
@@ -148,6 +149,22 @@ gender_replies = [
         "image_url":"https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcR5TWbk5DmxpPUfNNCsAxstPfzRm3yJStFx1QC7pvP2wiZ5EmtXDh5Aiw"
       }
     ]
+
+language_replies = [
+      {
+        "content_type":"text",
+        "title":"Yes",
+        "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_RED",
+        "image_url":"https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcR5TWbk5DmxpPUfNNCsAxstPfzRm3yJStFx1QC7pvP2wiZ5EmtXDh5Aiw"
+      },
+      {
+        "content_type":"text",
+        "title":"No",
+        "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_GREEN",
+        "image_url":"https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcSEbkZszcbchKY9Z4gqIX8WFHATnsVNoP-ZdrWYTQ4kIY9vl7Ww"
+      }
+    ]
+
 
 
 
