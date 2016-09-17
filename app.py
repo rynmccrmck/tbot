@@ -59,18 +59,21 @@ def webhook():
 			elif cache[sender_id]['state'] == 0:
 			    cache[sender_id]['state'] = 1
 		    	    time.sleep(2)
-		            send_quick_reply(sender_id, "What is your age group?" + state)	
+		            send_quick_reply(sender_id, "What is your age group?" + statei, youth_replies)	
 			elif cache[sender_id]['state'] == 1:
-			    cache[sender_id] == 2
+			    cache[sender_id]['state'] == 2
 			    log(message_text)
 			    if message_text.lower() == "youth":
 			        cache[sender_id]["youth"] = 1
 				send_message(sender_id,"Next question for youth ?" + state)
 			    elif message_text.lower() == "adult":
-				cache[sender_id]["state"] = 0
-				send_message(sender_id,"Next Question for adult? " + state)
+				cache[sender_id]["youth"] = 0
+				send_message(sender_id,"Next Question for adult? " + state)			    
 			    else:
 				send_message(sender_id, "hmm.. " + state)
+			elif cache[sender_id]['state'] == 2:
+			    cache['sender_id']['state'] == 3
+			    send_quick_reply(sender_id,"What  gender do you identify with?", gender_replies)	
 			else:
 			    send_message(sender_id,str(cache[sender_id]))
 		    except Exception as e:
@@ -89,9 +92,7 @@ def webhook():
 
 
 def send_message(recipient_id, message_text):
-
     log("sending message to {recipient}: {text}".format(recipient=recipient_id, text=message_text))
-
     params = {
         "access_token": os.environ["PAGE_ACCESS_TOKEN"]
     }
@@ -111,21 +112,8 @@ def send_message(recipient_id, message_text):
         log(r.status_code)
         log(r.text)
 
-def send_quick_reply(recipient_id, message_text):
-    log("sending message to {recipient}: {text}".format(recipient=recipient_id, text=message_text))
-    params = {
-        "access_token": os.environ["PAGE_ACCESS_TOKEN"]
-    }
-    headers = {
-        "Content-Type": "application/json"
-    }
-    data = json.dumps({
-        "recipient": {
-            "id": recipient_id
-        },
-        "message": {
-            "text": message_text,
-             "quick_replies":[
+
+youth_replies = [
       {
         "content_type":"text",
         "title":"Youth",
@@ -139,6 +127,45 @@ def send_quick_reply(recipient_id, message_text):
         "image_url":"https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcSEbkZszcbchKY9Z4gqIX8WFHATnsVNoP-ZdrWYTQ4kIY9vl7Ww"
       }
     ]
+
+gender_replies = [
+      {
+        "content_type":"text",
+        "title":"Female",
+        "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_RED",
+        "image_url":"https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcR5TWbk5DmxpPUfNNCsAxstPfzRm3yJStFx1QC7pvP2wiZ5EmtXDh5Aiw"
+      },
+      {
+        "content_type":"text",
+        "title":"Male",
+        "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_GREEN",
+        "image_url":"https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcSEbkZszcbchKY9Z4gqIX8WFHATnsVNoP-ZdrWYTQ4kIY9vl7Ww"
+      },
+      {
+        "content_type":"text",
+        "title":"Other/Prefer not to Answer",
+        "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_RED",
+        "image_url":"https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcR5TWbk5DmxpPUfNNCsAxstPfzRm3yJStFx1QC7pvP2wiZ5EmtXDh5Aiw"
+      }
+    ]
+
+
+
+def send_quick_reply(recipient_id, message_text,quick_replies):
+    log("sending message to {recipient}: {text}".format(recipient=recipient_id, text=message_text))
+    params = {
+        "access_token": os.environ["PAGE_ACCESS_TOKEN"]
+    }
+    headers = {
+        "Content-Type": "application/json"
+    }
+    data = json.dumps({
+        "recipient": {
+            "id": recipient_id
+        },
+        "message": {
+            "text": message_text,
+             "quick_replies":
         }
     })
     r = requests.post("https://graph.facebook.com/v2.6/me/messages", params=params, headers=headers, data=data)
