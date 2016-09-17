@@ -46,9 +46,9 @@ def webhook():
                     recipient_id = messaging_event["recipient"]["id"]  # the recipient's ID, which should be your page's facebook ID
                     message_text = messaging_event["message"]["text"]  # the message's text	
 		    if str(sender_id) not in cache.keys():
-			state = -1
+			state = str(-1)
 		    else:
-			state = cache[str(sender_id)] # users question state
+			state = str(cache[str(sender_id)]) # users question state
 		    try:	
 		        if str(sender_id) not in cache.keys():
 			    cache[str(sender_id)] = 0	
