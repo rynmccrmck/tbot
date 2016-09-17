@@ -52,14 +52,15 @@ def webhook():
 		            send_quick_reply(sender_id, "How are you feeling?")	
 			    cache[str(sender_id)] = 1
 			elif cache[str(sender_id)] == 1:
+			    log(message_text)
 			    if lower(message_text) == "calm":
 				send_message(sender_id,"Get a coffee maybe")
 			    elif lower(message_text) == "crazy":
 				send_message(sender_id,"Calm down")	
 			    else:
-				send_message(sender_id, message_text)
+				send_message(sender_id, "hmm")
 			else:
-				send_message(sender_id,str(cache[sender_id]))
+			    send_message(sender_id,str(cache[sender_id]))
 		    except:
 			send_message(sender_id, str(sys.exc_info()[0]))
 
