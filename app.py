@@ -45,7 +45,7 @@ def webhook():
                     recipient_id = messaging_event["recipient"]["id"]  # the recipient's ID, which should be your page's facebook ID
                     message_text = messaging_event["message"]["text"]  # the message's text	
 		    try:	
-		        if str("sender_id") not in cache.keys():
+		        if str(sender_id) not in cache.keys():
                             send_message(sender_id, "Welcome to T.Bot! We're here to help you find resources you need.  Type 'Start' to start or 'Restart' to start over")
 			    cache[str(sender_id)] = 0	
 			else:
