@@ -73,7 +73,6 @@ def webhook():
 			elif cache[sender_id]['state'] == 2:
 			    cache['sender_id']['state'] == 3
 			    send_message(sender_id,"Are you a member of the First Nations?")	
-			elif 
 			else:
 			    send_message(sender_id,str(cache[sender_id]))
 		    except Exception as e:
