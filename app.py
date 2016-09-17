@@ -45,28 +45,29 @@ def webhook():
                     sender_id = messaging_event["sender"]["id"]        # the facebook ID of the person sending you the message
                     recipient_id = messaging_event["recipient"]["id"]  # the recipient's ID, which should be your page's facebook ID
                     message_text = messaging_event["message"]["text"]  # the message's text	
+		    state = cache[str(sender_id)] # users question state
 		    try:	
 		        if str(sender_id) not in cache.keys():
 			    cache[str(sender_id)] = 0	
 			    time.sleep(2)
-                            send_message(sender_id, welcome)
+                            send_message(sender_id, welcome + state)
 			elif message_text.lower() == "restart":
 			    cache[sender_id] = 0	
 			    time.sleep(2)
-			    send_message(sender_id,welcome)
+			    send_message(sender_id,welcome + state)
 			elif cache[str(sender_id)] == 0:
 			    cache[str(sender_id)] = 1	
 		    	    time.sleep(2)
-		            send_quick_reply(sender_id, "How are you feeling?")	
+		            send_quick_reply(sender_id, "How are you feeling?" + state)	
 			elif cache[str(sender_id)] == 1:
 			    cache[str(sender_id)] == 2
 			    log(message_text)
 			    if message_text.lower() == "calm":
-				send_message(sender_id,"Get a coffee maybe")
+				send_message(sender_id,"Get a coffee maybe" + state)
 			    elif message_text.lower() == "crazy":
-				send_message(sender_id,"Calm down")	
+				send_message(sender_id,"Calm down" + state)	
 			    else:
-				send_message(sender_id, "hmm")
+				send_message(sender_id, "hmm" + state)
 			else:
 			    send_message(sender_id,str(cache[sender_id]))
 		    except Exception as e:
