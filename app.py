@@ -47,8 +47,9 @@ def webhook():
 		    try:	
 		        if str("sender_id") not in cache.keys():
                             send_message(sender_id, "Welcome to T.Bot! We're here to help you find resources you need.  Type 'Start' to start or 'Restart' to start over")
+			    cache[str(sender_id)] = 0	
 			else:
-		            send_message(sender_id, "test")		
+		            send_message(sender_id, "Question 1")		
 		    except:
 			send_message(sender_id, str(entry))
 
