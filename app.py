@@ -42,13 +42,13 @@ def webhook():
                     send_message(sender_id, "Ladies love Danny T")
 
                 if messaging_event.get("delivery"):  # delivery confirmation
-                    pass
+                    send_message(sender_id, "TEST1")
 
                 if messaging_event.get("optin"):  # optin confirmation
-                    pass
+                    send_message(sender_id, "TEST2")
 
                 if messaging_event.get("postback"):  # user clicked/tapped "postback" button in earlier message
-                    pass
+                    send_message(sender_id, "TEST3")
 
     return "ok", 200
 
