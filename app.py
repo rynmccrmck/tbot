@@ -61,9 +61,9 @@ def webhook():
 				send_message(sender_id, "hmm")
 			else:
 			    send_message(sender_id,str(cache[sender_id]))
-		    except:
-			send_message(sender_id, str(sys.exc_info()[0]))
-
+		    except Exception as e:
+			send_message(sender_id, "FAILED")
+			log(e.message)
                 if messaging_event.get("delivery"):  # delivery confirmation
                     pass
 
