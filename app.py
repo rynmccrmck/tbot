@@ -65,10 +65,10 @@ def webhook():
 			    log(message_text)
 			    if message_text.lower() == "youth":
 			        cache[sender_id]["youth"] = 1
-				send_message(sender_id,"Next question for youth ?" + state)
+				send_quick_reply(sender_id,"What  gender do you identify with?", gender_replies)
 			    elif message_text.lower() == "adult":
 				cache[sender_id]["youth"] = 0
-				send_message(sender_id,"Next Question for adult? " + state)			    
+				send_quick_reply(sender_id,"What  gender do you identify with?", gender_replies)
 			    else:
 				send_message(sender_id, "hmm.. " + state)
 			elif cache[sender_id]['state'] == 2:
