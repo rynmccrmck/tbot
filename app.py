@@ -56,6 +56,8 @@ def webhook():
 				send_message(sender_id,"Get a coffee maybe")
 			    elif lower(message_text) == "crazy":
 				send_message(sender_id,"Calm down")	
+			    else:
+				send_message(sender_id, message_text)
 			else:
 				send_message(sender_id,str(cache[sender_id]))
 		    except:
