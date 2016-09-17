@@ -49,7 +49,7 @@ def webhook():
                             send_message(sender_id, "Welcome to T.Bot! We're here to help you find resources you need.  Type 'Start' to start or 'Restart' to start over")
 			    cache[str(sender_id)] = 0	
 			else:
-		            send_message(sender_id, "Question Start")		
+		            send_quick_reply(sender_id, "How are you feeling?")		
 		    except:
 			send_message(sender_id, str(entry))
 
