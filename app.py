@@ -10,7 +10,7 @@ app = Flask(__name__)
 
 
 
-size = 100
+size = 1000
 cache = pylru.lrucache(size)
 
 
@@ -56,6 +56,8 @@ def webhook():
 				send_message(sender_id,"Get a coffee maybe")
 			    elif lower(message_text) == "crazy":
 				send_message(sender_id,"Calm down")	
+			else:
+				send_message(sender_id,str(cache[sender_id]))
 		    except:
 			send_message(sender_id, str(entry))
 
