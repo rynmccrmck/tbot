@@ -143,7 +143,7 @@ gender_replies = [
       },
       {
         "content_type":"text",
-        "title":"Other/Prefer not to Answer",
+        "title":"Other",
         "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_RED",
         "image_url":"https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcR5TWbk5DmxpPUfNNCsAxstPfzRm3yJStFx1QC7pvP2wiZ5EmtXDh5Aiw"
       }
