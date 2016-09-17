@@ -61,16 +61,16 @@ def webhook():
 			elif cache[str(sender_id)] == 0:
 			    cache[str(sender_id)] = 1	
 		    	    time.sleep(2)
-		            send_quick_reply(sender_id, "How are you feeling?" + state)	
+		            send_quick_reply(sender_id, "What is your age group?" + state)	
 			elif cache[str(sender_id)] == 1:
 			    cache[str(sender_id)] == 2
 			    log(message_text)
-			    if message_text.lower() == "calm":
-				send_message(sender_id,"Get a coffee maybe" + state)
-			    elif message_text.lower() == "crazy":
-				send_message(sender_id,"Calm down" + state)	
+			    if message_text.lower() == "youth":
+				send_message(sender_id,"Next question for youth ?" + state)
+			    elif message_text.lower() == "adult":
+				send_message(sender_id,"Next Question for adult? " + state)	
 			    else:
-				send_message(sender_id, "hmm" + state)
+				send_message(sender_id, "hmm.. " + state)
 			else:
 			    send_message(sender_id,str(cache[sender_id]))
 		    except Exception as e:
@@ -128,13 +128,13 @@ def send_quick_reply(recipient_id, message_text):
              "quick_replies":[
       {
         "content_type":"text",
-        "title":"Crazy",
+        "title":"Youth",
         "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_RED",
         "image_url":"https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcR5TWbk5DmxpPUfNNCsAxstPfzRm3yJStFx1QC7pvP2wiZ5EmtXDh5Aiw"
       },
       {
         "content_type":"text",
-        "title":"Calm",
+        "title":"Adult",
         "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_GREEN",
         "image_url":"https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcSEbkZszcbchKY9Z4gqIX8WFHATnsVNoP-ZdrWYTQ4kIY9vl7Ww"
       }
