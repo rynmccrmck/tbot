@@ -59,7 +59,7 @@ def webhook():
 			elif cache[sender_id]['state'] == 0:
 			    cache[sender_id]['state'] = 1
 		    	    time.sleep(2)
-		            send_quick_reply(sender_id, "What is your age group?" + statei, youth_replies)	
+		            send_quick_reply(sender_id, "What is your age group?" + state, youth_replies)	
 			elif cache[sender_id]['state'] == 1:
 			    cache[sender_id]['state'] == 2
 			    log(message_text)
