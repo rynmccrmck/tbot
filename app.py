@@ -38,7 +38,7 @@ def webhook():
 
         for entry in data["entry"]:
             for messaging_event in entry["messaging"]:
-
+	
                 if messaging_event.get("message"):  # someone sent us a message
 
                     sender_id = messaging_event["sender"]["id"]        # the facebook ID of the person sending you the message
@@ -48,10 +48,10 @@ def webhook():
 		        if str(sender_id) not in cache.keys():
                             send_message(sender_id, "Welcome to T.Bot! We're here to help you find resources you need.  Type 'Start' to start or 'Restart' to start over")
 			    cache[str(sender_id)] = 0	
-			elif cache[sender_id] == 0:
+			elif cache[str(sender_id)] == 0:
 		            send_quick_reply(sender_id, "How are you feeling?")	
-			    cache[sender_id] = 1
-			elif cache[sender_id] == 1:
+			    cache[str(sender_id)] = 1
+			elif cache[str(sender_id)] == 1:
 			    if lower(message_text) == "calm":
 				send_message(sender_id,"Get a coffee maybe")
 			    elif lower(message_text) == "crazy":
@@ -59,7 +59,7 @@ def webhook():
 			else:
 				send_message(sender_id,str(cache[sender_id]))
 		    except:
-			send_message(sender_id, str(entry))
+			send_message(sender_id, str(cache[sender_id]))
 
                 if messaging_event.get("delivery"):  # delivery confirmation
                     pass
