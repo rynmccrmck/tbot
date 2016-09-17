@@ -53,9 +53,9 @@ def webhook():
 			    cache[str(sender_id)] = 1
 			elif cache[str(sender_id)] == 1:
 			    log(message_text)
-			    if lower(message_text) == "calm":
+			    if message_text.lower() == "calm":
 				send_message(sender_id,"Get a coffee maybe")
-			    elif lower(message_text) == "crazy":
+			    elif message_text.lower() == "crazy":
 				send_message(sender_id,"Calm down")	
 			    else:
 				send_message(sender_id, "hmm")
