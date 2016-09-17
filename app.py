@@ -9,11 +9,8 @@ from flask import Flask, request
 
 app = Flask(__name__)
 
-
-
-size = 1000
+size = 10000
 cache = pylru.lrucache(size)
-
 
 @app.route('/', methods=['GET'])
 def verify():
@@ -26,7 +23,6 @@ def verify():
 
     return "Hello world", 200
 
-
 @app.route('/', methods=['POST'])
 def webhook():
 
@@ -34,7 +30,8 @@ def webhook():
     welcome = "Welcome to T.Bot! We're here to help you find resources you need.  Type 'Start' to start or 'Restart' to start over"
     data = request.get_json()
     log(data)  # you may not want to log every incoming message in production, but it's good for testing
-
+        
+	
     if data["object"] == "page":
 
         for entry in data["entry"]:
@@ -45,30 +42,33 @@ def webhook():
                     sender_id = messaging_event["sender"]["id"]        # the facebook ID of the person sending you the message
                     recipient_id = messaging_event["recipient"]["id"]  # the recipient's ID, which should be your page's facebook ID
                     message_text = messaging_event["message"]["text"]  # the message's text	
+                    
 		    if str(sender_id) not in cache.keys():
 			state = str(-1)
 		    else:
 			state = str(cache[str(sender_id)]) # users question state
-		    try:	
+		    try:
 		        if str(sender_id) not in cache.keys():
-			    cache[str(sender_id)] = 0	
+			    cache[sender_id] = {"state":0}
 			    time.sleep(2)
                             send_message(sender_id, welcome + state)
 			elif message_text.lower() == "restart":
-			    cache[sender_id] = 0	
+			    cache[sender_id]["state"] = 0
 			    time.sleep(2)
 			    send_message(sender_id,welcome + state)
-			elif cache[str(sender_id)] == 0:
-			    cache[str(sender_id)] = 1	
+			elif cache[sender_id]['state'] == 0:
+			    cache[sender_id]['state'] = 1
 		    	    time.sleep(2)
 		            send_quick_reply(sender_id, "What is your age group?" + state)	
-			elif cache[str(sender_id)] == 1:
-			    cache[str(sender_id)] == 2
+			elif cache[sender_id]['state'] == 1:
+			    cache[sender_id] == 2
 			    log(message_text)
 			    if message_text.lower() == "youth":
+			        cache[sender_id]["youth"] = 1
 				send_message(sender_id,"Next question for youth ?" + state)
 			    elif message_text.lower() == "adult":
-				send_message(sender_id,"Next Question for adult? " + state)	
+				cache[sender_id]["state"] = 0
+				send_message(sender_id,"Next Question for adult? " + state)
 			    else:
 				send_message(sender_id, "hmm.. " + state)
 			else:
