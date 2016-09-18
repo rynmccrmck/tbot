@@ -52,7 +52,7 @@ def webhook():
 			        cache[sender_id]["purpose"] == "job"
 			        time.sleep(2)
 			        send_quick_reply(sender_id,"Looking for employment services?",job_replies)
-			    elif cache[sender_id]['purpose'] = "job":
+			    elif cache[sender_id]['purpose'] == "job":
 				if message_text == "Pre-Job Training":
 				    send_quick_reply(sender_id, "There are numerous services available. Let's narrow it down.  What is your age group?", age_replies)
 			            cache[sender_id]['purpose'] = "PJT"
