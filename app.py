@@ -203,7 +203,7 @@ language_replies = [
 
 
 
-def youth_results(sender_id,message_text, json_data):
+def youth_results(recipient_id,message_text, json_data):
     log("sending message to {recipient}: {text}".format(recipient=recipient_id, text=message_text))
     params = {
         "access_token": os.environ["PAGE_ACCESS_TOKEN"]
