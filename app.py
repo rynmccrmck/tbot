@@ -219,7 +219,7 @@ def youth_results(recipient_id,message_text, json_data):
 	"message":{
     "attachment":{
       "type":"template",
-#      "payload":{
+      "payload": #{
 #        "template_type":"generic",
 #        "elements":[
 #          {
