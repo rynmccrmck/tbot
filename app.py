@@ -72,7 +72,7 @@ def webhook():
 			            log(cache[sender_id])
 				    send_quick_reply(sender_id, "There are numerous services available. Let's narrow it down.  Are you under 30?", youth_replies)
 				else:
-				    send_message("Job finding placeholder")
+				    send_message(sender_id,"Job finding placeholder")
 				    cache[sender_id]['purpose'] = 3
 				    time.sleep(2)	
 		            elif cache[sender_id]['purpose'] == 2 and cache[sender_id]['youth'] == -1:
@@ -152,6 +152,12 @@ job_replies = [
         "content_type":"text",
         "title":"Pre-Job Training",
         "payload":"training",
+        #"image_url":"https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcSEbkZszcbchKY9Z4gqIX8WFHATnsVNoP-ZdrWYTQ4kIY9vl7Ww"
+      },
+     {
+        "content_type":"text",
+        "title":"Other",
+        "payload":"other",
         #"image_url":"https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcSEbkZszcbchKY9Z4gqIX8WFHATnsVNoP-ZdrWYTQ4kIY9vl7Ww"
       }
     ]
