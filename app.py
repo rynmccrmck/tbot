@@ -54,7 +54,7 @@ def webhook():
 			elif "job" in message_text.lower():
 			    cache[sender_id]["state"] = 0
 			    time.sleep(2)
-			    send_quick_reply(sender_id,job_replies)
+			    send_quick_reply(sender_id,"Looking for employment services?",job_replies)
 			elif cache[sender_id]['state'] == 0:
 			    cache[sender_id]['state'] = 1
 		    	    time.sleep(2)
