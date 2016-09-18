@@ -44,7 +44,7 @@ def webhook():
                     
 		    try:
 		        if sender_id not in cache.keys():
-			    cache[sender_id] = {"purpose":-1,"youth":-1,"woman":-1,"current":0}
+			    cache[sender_id] = {"purpose":-1,"youth":-1,"woman":-1}
 			    time.sleep(4)
 			    log(cache[sender_id])
                             send_message(sender_id, welcome)
