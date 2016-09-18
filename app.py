@@ -79,7 +79,10 @@ def webhook():
 				if message_text.lower() == "yes":
 				    cache[sender_id]['youth'] = 1
 				    time.sleep(2)
+		                    r = requests.post('http://ec2-52-40-133-183.us-west-2.compute.amazonaws.com:1738/classify', {"data":'{"youth":1}'}) 
+				    adrian_data = json.loads("{" + r.json()[1:-1].replace("\n","") + "}")	
 				    send_message(sender_id,"youth placeholder")	
+				    youth_results(sender_id,"","")
 				else:
 				    cache[sender_id]['youth'] = 0			
 				    time.sleep(2)
@@ -200,6 +203,51 @@ language_replies = [
 
 
 
+def youth_results(sender_id,message_text, json_data):
+    log("sending message to {recipient}: {text}".format(recipient=recipient_id, text=message_text))
+    params = {
+        "access_token": os.environ["PAGE_ACCESS_TOKEN"]
+    }
+    headers = {
+        "Content-Type": "application/json"
+    }
+    data = json.dumps({
+        "recipient": {
+            "id": recipient_id
+        },
+
+	"message":{
+    "attachment":{
+      "type":"template",
+      "payload":{
+        "template_type":"generic",
+        "elements":[
+          {
+            "title":"Welcome to Peter\'s Hats",
+            "item_url":"https://petersfancybrownhats.com",
+            "image_url":"https://petersfancybrownhats.com/company_image.png",
+            "subtitle":"We\'ve got the right hat for everyone.",
+            "buttons":[
+              {
+                "type":"web_url",
+                "url":"https://petersfancybrownhats.com",
+                "title":"View Website"
+              },
+              {
+                "type":"postback",
+                "title":"Start Chatting",
+                "payload":"DEVELOPER_DEFINED_PAYLOAD"
+              }              
+            ]
+          }
+        ]
+      }
+	}}
+	})
+    r = requests.post("https://graph.facebook.com/v2.6/me/messages", params=params, headers=headers, data=data)
+    if r.status_code != 200:
+        log(r.status_code)
+        log(r.text)
 
 def send_quick_reply(recipient_id, message_text,quick_replies):
     log("sending message to {recipient}: {text}".format(recipient=recipient_id, text=message_text))
