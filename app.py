@@ -9,7 +9,7 @@ from flask import Flask, request
 
 app = Flask(__name__)
 
-size = 100000
+size = 10000
 cache = pylru.lrucache(size)
 
 @app.route('/', methods=['GET'])
@@ -42,41 +42,40 @@ def webhook():
                     recipient_id = messaging_event["recipient"]["id"]  # the recipient's ID, which should be your page's facebook ID
                     message_text = messaging_event["message"]["text"]  # the message's text	
                     
-		    if str(sender_id) not in cache.keys():
-			state = str(-1)
-		    else:
-			state = str(cache[str(sender_id)]) # users question state
 		    try:
 		        if str(sender_id) not in cache.keys():
-			    cache[sender_id] = {"state":0}
+			    cache[sender_id] = {"purpose":"na"}
 			    time.sleep(2)
                             send_message(sender_id, welcome)
-			elif "job" in message_text.lower() and state != 1:
-			    cache[sender_id]["state"] = 1
-			    time.sleep(2)
-			    send_quick_reply(sender_id,"Looking for employment services?",job_replies)
-			elif cache[sender_id]['state'] == 1:
-			    cache[sender_id]['state'] = 1
-		    	    time.sleep(2)
-		            send_quick_reply(sender_id, "Are you under 30?" + state, youth_replies)	
-			elif cache[sender_id]['state'] == 1:
-			    cache[sender_id]['state'] == 2
-			    log(message_text)
-			    if message_text.lower() == "youth":
-			        cache[sender_id]["youth"] = 1
-				send_quick_reply(sender_id,"What  gender do you identify with?", gender_replies)
-			    elif message_text.lower() == "adult":
-				cache[sender_id]["youth"] = 0
-				send_quick_reply(sender_id,"What  gender do you identify with?", gender_replies)
-			    else:
-				send_message(sender_id, "hmm.. " + state)
-			elif cache[sender_id]['state'] == 2:
-			    cache['sender_id']['state'] == 3
-			    send_message(sender_id,"Are you a member of the First Nations?")	
 			else:
-			    send_message(sender_id,str(cache[sender_id]))
+			    if cache[sender_id]['purpose'] == "na" and ("job" in message_text or "employment" in message_text):  
+			        cache[sender_id]["purpose"] = "job"
+			        time.sleep(2)
+			        send_quick_reply(sender_id,"Looking for employment services?",job_replies)
+			    elif cache[sender_id]['purpose'] = "job":
+				if message_text == "Pre-Job Training":
+				    send_quick_reply(sender_id, "There are numerous services available. Let's narrow it down.  What is your age group?", age_replies)
+			            cache[sender_id]['purpose'] = "PJT"
+		    	    	    time.sleep(2)
+#		            send_quick_reply(sender_id, "Are you under 30?" + state, youth_replies)	
+#			elif cache[sender_id]['state'] == 1 "youth" not in cahce[sender_id].keys():
+#			    cache[sender_id]['state'] == 2
+#			    log(message_text)
+#			    if message_text.lower() == "youth":
+#			        cache[sender_id]["youth"] = 1
+#				send_quick_reply(sender_id,"What  gender do you identify with?", gender_replies)
+#			    elif message_text.lower() == "adult":
+#				cache[sender_id]["youth"] = 0
+#				send_quick_reply(sender_id,"What  gender do you identify with?", gender_replies)
+#			    else:
+#				send_message(sender_id, "hmm.. " + state)
+#			elif cache[sender_id]['state'] == 2:
+#			    cache['sender_id']['state'] == 3
+#			    send_message(sender_id,"Are you a member of the First Nations?")	
+#			else:
+#			    send_message(sender_id,str(cache[sender_id]))
 		    except Exception as e:
-			send_message(sender_id, "FAILED")
+			send_message(sender_id, "Sorry we are currently experiencing some difficulties, please call 555-555-5555 or email info@tbot.ca")
 			log(e.message)
                 if messaging_event.get("delivery"):  # delivery confirmation
                     pass
