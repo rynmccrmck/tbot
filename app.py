@@ -79,6 +79,7 @@ def webhook():
 				if message_text.lower() == "yes":
 				    cache[sender_id]['youth'] = 1
 				    time.sleep(4)
+				    send_message(sender_id, "Retrieving results, just a moment!")
 		                    r = requests.post('http://ec2-52-40-133-183.us-west-2.compute.amazonaws.com:1738/classify', {"data":'{"youth":1}'}) 
 				    adrian_data = json.loads("{" + r.json()[1:-1].replace("\n","") + "}")	
 				    youth_results(sender_id,"","")
