@@ -9,7 +9,7 @@ from flask import Flask, request
 
 app = Flask(__name__)
 
-size = 10000
+size = 100000
 cache = pylru.lrucache(size)
 
 @app.route('/', methods=['GET'])
@@ -27,7 +27,7 @@ def verify():
 def webhook():
 
     # endpoint for processing incoming messaging events
-    welcome = "Welcome to T.Bot! We're here to help you find resources you need.  Type 'Start' to start or 'Restart' to start over"
+    welcome = "Welcome to Toronto Services Wayfinding! We're here to help you find the resources you need. What are you looking for?"
     data = request.get_json()
     log(data)  # you may not want to log every incoming message in production, but it's good for testing
         	
@@ -51,10 +51,10 @@ def webhook():
 			    cache[sender_id] = {"state":0}
 			    time.sleep(2)
                             send_message(sender_id, welcome)
-			elif message_text.lower() == "restart":
+			elif "job" in message_text.lower():
 			    cache[sender_id]["state"] = 0
 			    time.sleep(2)
-			    send_message(sender_id,welcome)
+			    send_quick_reply(sender_id,job_replies)
 			elif cache[sender_id]['state'] == 0:
 			    cache[sender_id]['state'] = 1
 		    	    time.sleep(2)
@@ -89,7 +89,7 @@ def webhook():
 
     return "ok", 200
 
-#age,gender,
+
 
 def send_message(recipient_id, message_text):
     log("sending message to {recipient}: {text}".format(recipient=recipient_id, text=message_text))
@@ -125,6 +125,21 @@ youth_replies = [
         "title":"No",
         "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_GREEN",
         "image_url":"https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcSEbkZszcbchKY9Z4gqIX8WFHATnsVNoP-ZdrWYTQ4kIY9vl7Ww"
+      }
+    ]
+
+job_replies = [
+      {
+        "content_type":"text",
+        "title":"Job Finding Services",
+        "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_RED",
+       # "image_url":"https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcR5TWbk5DmxpPUfNNCsAxstPfzRm3yJStFx1QC7pvP2wiZ5EmtXDh5Aiw"
+      },
+      {
+        "content_type":"text",
+        "title":"Pre-Job Training",
+        "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_GREEN",
+        #"image_url":"https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcSEbkZszcbchKY9Z4gqIX8WFHATnsVNoP-ZdrWYTQ4kIY9vl7Ww"
       }
     ]
 
