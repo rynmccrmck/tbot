@@ -219,29 +219,33 @@ def youth_results(recipient_id,message_text, json_data):
 	"message":{
     "attachment":{
       "type":"template",
-      "payload":{
-        "template_type":"generic",
-        "elements":[
-          {
-            "title":"Welcome to Peter\'s Hats",
-            "item_url":"https://petersfancybrownhats.com",
-            "image_url":"https://petersfancybrownhats.com/company_image.png",
-            "subtitle":"We\'ve got the right hat for everyone.",
-            "buttons":[
-              {
-                "type":"web_url",
-                "url":"https://petersfancybrownhats.com",
-                "title":"View Website"
-              },
-              {
-                "type":"postback",
-                "title":"Start Chatting",
-                "payload":"DEVELOPER_DEFINED_PAYLOAD"
-              }              
-            ]
-          }
-        ]
-      }
+#      "payload":{
+#        "template_type":"generic",
+#        "elements":[
+#          {
+#            "title":"Welcome to Peter\'s Hats",
+#            "item_url":"https://petersfancybrownhats.com",
+#            "image_url":"https://petersfancybrownhats.com/company_image.png",
+#            "subtitle":"We\'ve got the right hat for everyone.",
+#            "buttons":[
+#              {
+#                "type":"web_url",
+#                "url":"https://petersfancybrownhats.com",
+#                "title":"View Website"
+#              },
+ #             {
+ #               "type":"postback",
+ #               "title":"Start Chatting",
+ #               "payload":"DEVELOPER_DEFINED_PAYLOAD"
+ #             }              
+ #           ]
+ #         }
+ #       ]
+ #     }
+
+{u'template_type': u'generic', u'elements': [{u'buttons': [{u'url': u'www1.toronto.ca/wps/portal/contentonly?vgnextoid=a...', u'type': u'web_url', u'title': u'View Website'}, {u'type': u'phone_number', u'payload': u'+16478875298', u'title': u'Call now'}], u'subtitle': u'full time paid employment preparation program -- 5 week pre-employment including resume preparation, employment readiness skills, career planning, counselling and referral; 16 to 24 week supported', u'item_url': u'www1.toronto.ca/wps/portal/contentonly?vgnextoid=a...', u'image_url': u'https://www.galepartners.com/media/G43_Mugs-12_eAgvk8z.jpg', u'title': u'Toronto. Toronto Youth Job Corps'}, {u'buttons': [{u'url': u'www.yes.on.ca', u'type': u'web_url', u'title': u'View Website'}, {u'type': u'phone_number', u'payload': u'+16478875298', u'title': u'Call now'}], u'subtitle': u'paid, group-based employability and life skills workshops * paid work placements to a maximum of 10 weeks * individual counselling * follow-up support', u'item_url': u'www.yes.on.ca', u'image_url': u'https://www.galepartners.com/media/G43_Mugs-12_eAgvk8z.jpg', u'title': u'Youth Employment Services YES - Youth Job Centre'}, {u'buttons': [{u'url': u'www.covenanthousetoronto.ca', u'type': u'web_url', u'title': u'View Website'}, {u'type': u'phone_number', u'payload': u'+16478875298', u'title': u'Call now'}], u'subtitle': u'', u'item_url': u'www.covenanthousetoronto.ca', u'image_url': u'https://www.galepartners.com/media/G43_Mugs-12_eAgvk8z.jpg', u'title': u'Job Centre'}, {u'buttons': [{u'url': u'www.jobstartworks.org', u'type': u'web_url', u'title': u'View Website'}, {u'type': u'phone_number', u'payload': u'+16478875298', u'title': u'Call now'}], u'subtitle': u'comprehensive employment and job search services * assessment of skills, interests and experience * job search strategies, including resume preparation * information about careers and occupations,', u'item_url': u'www.jobstartworks.org', u'image_url': u'https://www.galepartners.com/media/G43_Mugs-12_eAgvk8z.jpg', u'title': u'JobStart - Lake Shore Boulevard - Ontario Employment Services'}, {u'buttons': [{u'url': u'www.ymcagta.org', u'type': u'web_url', u'title': u'View Website'}, {u'type': u'phone_number', u'payload': u'+16478875298', u'title': u'Call now'}], u'subtitle': u'comprehensive employment and job search services * assessment of skills, interests and experience * job search strategies, including resume preparation * information about careers and occupations,', u'item_url': u'www.ymcagta.org', u'image_url': u'https://www.galepartners.com/media/G43_Mugs-12_eAgvk8z.jpg', u'title': u'YMCA of Greater Toronto - Scarborough North East - Ontario Employment Services'}]}
+
+
 	}}
 	})
     r = requests.post("https://graph.facebook.com/v2.6/me/messages", params=params, headers=headers, data=data)
