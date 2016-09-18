@@ -43,7 +43,7 @@ def webhook():
                     message_text = messaging_event["message"]["text"]  # the message's text	
                     
 		    try:
-		        if str(sender_id) not in cache.keys():
+		        if sender_id not in cache.keys():
 			    cache[sender_id] = {"purpose":"na","youth":"na","woman":"na","current":0}
 			    time.sleep(2)
                             send_message(sender_id, welcome)
@@ -54,7 +54,7 @@ def webhook():
 			else:
 			    if cache[sender_id]['purpose'] == "na":
 				if  ("job" in message_text or "employment" in message_text or "work" in message_text):  
-   			            cache[sender_id]["purpose"] == "job"
+   			            cache[sender_id]['purpose'] == "job"
 			            time.sleep(2)
 			            send_quick_reply(sender_id,"Looking for employment services?",job_replies)
 				elif "food" in message_text or " eat" in message_text:
