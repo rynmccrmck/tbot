@@ -56,7 +56,7 @@ def webhook():
 			else:
 			    if cache[sender_id]['purpose'] == -1:
 				if  ("job" in message_text or "employment" in message_text or "work" in message_text):  
-   			            cache[sender_id]['purpose'] == 1
+   			            cache[sender_id]['purpose'] = 1
 			            time.sleep(2)
 				    log(cache[sender_id])
 			            send_quick_reply(sender_id,"Looking for employment services?",job_replies)
