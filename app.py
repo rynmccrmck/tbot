@@ -70,7 +70,7 @@ def webhook():
 			            cache[sender_id]['purpose'] = 2
 				    time.sleep(2)
 			            log(cache[sender_id])
-				    send_quick_reply(sender_id, "There are numerous services available. Let's narrow it down.  What is your age group?", age_replies)
+				    send_quick_reply(sender_id, "There are numerous services available. Let's narrow it down.  What is your age group?", youth_replies)
 				else:
 				    send_message("Job finding placeholder")
 				    cache[sender_id]['purpose'] = 3
