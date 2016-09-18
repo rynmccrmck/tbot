@@ -154,13 +154,13 @@ job_replies = [
       {
         "content_type":"text",
         "title":"Job Finding Services",
-        "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_RED",
+        "payload":"finding",
        # "image_url":"https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcR5TWbk5DmxpPUfNNCsAxstPfzRm3yJStFx1QC7pvP2wiZ5EmtXDh5Aiw"
       },
       {
         "content_type":"text",
         "title":"Pre-Job Training",
-        "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_GREEN",
+        "payload":"training",
         #"image_url":"https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcSEbkZszcbchKY9Z4gqIX8WFHATnsVNoP-ZdrWYTQ4kIY9vl7Ww"
       }
     ]
@@ -169,19 +169,19 @@ gender_replies = [
       {
         "content_type":"text",
         "title":"Female",
-        "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_RED",
+        "payload":"Female",
   #      "image_url":"https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcR5TWbk5DmxpPUfNNCsAxstPfzRm3yJStFx1QC7pvP2wiZ5EmtXDh5Aiw"
       },
       {
         "content_type":"text",
         "title":"Male",
-        "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_GREEN",
+        "payload":"Male",
    #     "image_url":"https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcSEbkZszcbchKY9Z4gqIX8WFHATnsVNoP-ZdrWYTQ4kIY9vl7Ww"
       },
       {
         "content_type":"text",
         "title":"Other",
-        "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_RED",
+        "payload":"Other",
     #    "image_url":"https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcR5TWbk5DmxpPUfNNCsAxstPfzRm3yJStFx1QC7pvP2wiZ5EmtXDh5Aiw"
       }
     ]
@@ -190,13 +190,13 @@ language_replies = [
       {
         "content_type":"text",
         "title":"Yes",
-        "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_RED",
+        "payload":"Yes",
       #  "image_url":"https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcR5TWbk5DmxpPUfNNCsAxstPfzRm3yJStFx1QC7pvP2wiZ5EmtXDh5Aiw"
       },
       {
         "content_type":"text",
         "title":"No",
-        "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_GREEN",
+        "payload":"No",
      #   "image_url":"https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcSEbkZszcbchKY9Z4gqIX8WFHATnsVNoP-ZdrWYTQ4kIY9vl7Ww"
       }
     ]
