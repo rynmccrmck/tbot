@@ -49,7 +49,7 @@ def webhook():
                             send_message(sender_id, welcome)
 			else:
 			    if cache[sender_id]['purpose'] == "na" and ("job" in message_text or "employment" in message_text):  
-			        cache[sender_id]["purpose"] = "job"
+			        cache[sender_id]["purpose"] == "job"
 			        time.sleep(2)
 			        send_quick_reply(sender_id,"Looking for employment services?",job_replies)
 			    elif cache[sender_id]['purpose'] = "job":
