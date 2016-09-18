@@ -9,7 +9,7 @@ from flask import Flask, request
 
 app = Flask(__name__)
 
-size = 100
+size = 1000
 cache = pylru.lrucache(size)
 
 @app.route('/', methods=['GET'])
@@ -44,17 +44,17 @@ def webhook():
                     
 		    try:
 		        if sender_id not in cache.keys():
-			    cache[sender_id] = {"purpose":"na","youth":"na","woman":"na","current":0}
+			    cache[sender_id] = {"purpose":-1,"youth":-1,"woman":-1,"current":0}
 			    time.sleep(2)
                             send_message(sender_id, welcome)
 			elif "restart" in message_text:
-			    cache[sender_id] = {"purpose":"na","youth":"na","woman":"na","current":0}
+			    cache[sender_id] = {"purpose":-1,"youth":-1,"woman":-1,"current":0}
 			    time.sleep(2)
    			    send_message(sender_id, welcome)
 			else:
-			    if cache[sender_id]['purpose'] == "na":
+			    if cache[sender_id]['purpose'] == -1:
 				if  ("job" in message_text or "employment" in message_text or "work" in message_text):  
-   			            cache[sender_id]['purpose'] == "job"
+   			            cache[sender_id]['purpose'] == 1
 			            time.sleep(2)
 			            send_quick_reply(sender_id,"Looking for employment services?",job_replies)
 				elif "food" in message_text or " eat" in message_text:
@@ -62,23 +62,27 @@ def webhook():
 				else:
 				    send_message(sender_id, "Sorry I couldn't understand.")
 				    log(cache[sender_id])
-			    elif cache[sender_id]['purpose'] == "job":
+			    elif cache[sender_id]['purpose'] == 1:
 				if "training" in message_text.lower():
-			            cache[sender_id]['purpose'] = "PJT"
+			            cache[sender_id]['purpose'] = 2
 				    time.sleep(2)
 				    send_quick_reply(sender_id, "There are numerous services available. Let's narrow it down.  What is your age group?", age_replies)
 				else:
 				    send_message("Job finding placeholder")
-				    cache[sender_id]['purpose'] = "JF"
+				    cache[sender_id]['purpose'] = 3
 				    time.sleep(2)	
-		            elif cache[sender_id]['purpose'] == "PJT" and cache[sender_id]['youth'] == "na":
-				cache[sender_id]['youth'] = "asked"
+		            elif cache[sender_id]['purpose'] == 1 and cache[sender_id]['youth'] == -1:
+				cache[sender_id]['youth'] = -2
 				time.sleep(2)
 				send_quick_reply(sender_id, "Are you under 30?", youth_replies)
-			    elif cache[sender_id]['youth'] == "asked":
+			    elif cache[sender_id]['youth'] == -2:
 				if message_text.lower == "yes":
+				    cache[sender_id]['youth'] = 1
+				    time.sleep(2)
 				    send_message(sender_id,"display youth job")
 				else:
+				    cache[sender_id]['youth'] = 0
+				    time.sleep(2)
 				    send_message(sender_id, "display adult jobs")
 			    else:
 				send_message(sender_id,"Sorry I don't understand, are you looking for job services, financial support or something else?")	
