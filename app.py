@@ -44,7 +44,7 @@ def webhook():
                     
 		    try:
 		        if str(sender_id) not in cache.keys():
-			    cache[sender_id] = {"purpose":"na"}
+			    cache[sender_id] = {"purpose":"na","youth":"na","woman":"na","current":0}
 			    time.sleep(2)
                             send_message(sender_id, welcome)
 			else:
@@ -57,7 +57,15 @@ def webhook():
 				    send_quick_reply(sender_id, "There are numerous services available. Let's narrow it down.  What is your age group?", age_replies)
 			            cache[sender_id]['purpose'] = "PJT"
 		    	    	    time.sleep(2)
-#		            send_quick_reply(sender_id, "Are you under 30?" + state, youth_replies)	
+		            elif cache[sender_id]['purpose'] == "PJT" and cache[sender_id]['youth'] == "na":
+				cache[sender_id]['youth'] = "asked"
+				send_quick_reply(sender_id, "Are you under 30?", youth_replies)
+			    elif cache[sender_id]['youth'] == "asked":
+				if message_text.lower == "yes":
+				    send_message(sender_id,"display youth job")
+				else:
+				    send_message(sender_id, "display adult jobs")
+
 #			elif cache[sender_id]['state'] == 1 "youth" not in cahce[sender_id].keys():
 #			    cache[sender_id]['state'] == 2
 #			    log(message_text)
