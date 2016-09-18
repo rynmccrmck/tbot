@@ -232,7 +232,7 @@ def youth_results(recipient_id,message_text, json_data):
 	u'payload': u'+16478875298', u'title': u'Call now'}], 
 	u'subtitle': u'full time paid employment preparation program -- 5 week pre-employment including resume preparation, employment readiness skills, career planning, counselling and referral; 16 to 24 week supported', 
 	u'item_url': u'www1.toronto.ca/wps/portal/contentonly?vgnextoid=a...', 
-	u'image_url': u'https://www.galepartners.com/media/G43_Mugs-12_eAgvk8z.jpg', u'title': u'Toronto. Toronto Youth Job Corps'}, 
+	u'image_url': u'http://www.westnh.org/wp-content/uploads/2014/06/tyjc-logo.png', u'title': u'Toronto. Toronto Youth Job Corps'}, 
 
 {u'buttons': [{u'url': u'www.yes.on.ca', u'type': u'web_url', u'title': u'View Website'}, {u'type': u'phone_number', u'payload': u'+16478875298', u'title': u'Call now'}], u'subtitle': u'paid, group-based employability and life skills workshops * paid work placements to a maximum of 10 weeks * individual counselling * follow-up support', u'item_url': u'www.yes.on.ca', u'image_url': u'http://www.yes.on.ca/wp-content/themes/yes-theme/images/yes-youth-logo.png', u'title': u'Youth Employment Services YES - Youth Job Centre'}, 
 
