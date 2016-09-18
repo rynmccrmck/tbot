@@ -58,7 +58,7 @@ def webhook():
 				if  ("job" in message_text or "employment" in message_text or "work" in message_text):  
    			            cache[sender_id]['purpose'] == 1
 			            time.sleep(2)
-				    log[cache[sender_id]]
+				    log(cache[sender_id])
 			            send_quick_reply(sender_id,"Looking for employment services?",job_replies)
 				elif "food" in message_text or " eat" in message_text:
 				    send_message(sender_id, "placeholder food bank services")
@@ -110,6 +110,7 @@ def webhook():
 		    except Exception as e:
 			send_message(sender_id, "Sorry we are currently experiencing some difficulties, please call 555-555-5555 or email info@tbot.ca")
 			log(e.message)
+			log("done")
                 if messaging_event.get("delivery"):  # delivery confirmation
                     pass
 
