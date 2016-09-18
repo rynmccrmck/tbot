@@ -9,7 +9,7 @@ from flask import Flask, request
 
 app = Flask(__name__)
 
-size = 10000
+size = 1000000
 cache = pylru.lrucache(size)
 
 @app.route('/', methods=['GET'])
