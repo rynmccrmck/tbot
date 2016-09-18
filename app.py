@@ -70,43 +70,23 @@ def webhook():
 			            cache[sender_id]['purpose'] = 2
 				    time.sleep(2)
 			            log(cache[sender_id])
-				    send_quick_reply(sender_id, "There are numerous services available. Let's narrow it down.  What is your age group?", youth_replies)
+				    send_quick_reply(sender_id, "There are numerous services available. Let's narrow it down.  Are you under 30?", youth_replies)
 				else:
 				    send_message("Job finding placeholder")
 				    cache[sender_id]['purpose'] = 3
 				    time.sleep(2)	
-		            elif cache[sender_id]['purpose'] == 1 and cache[sender_id]['youth'] == -1:
-				cache[sender_id]['youth'] = -2
-				time.sleep(2)
-				send_quick_reply(sender_id, "Are you under 30?", youth_replies)
-			    elif cache[sender_id]['youth'] == -2:
-				if message_text.lower == "yes":
+		            elif cache[sender_id]['purpose'] == 2 and cache[sender_id]['youth'] == -1:
+				if message_text.lower() == "yes":
 				    cache[sender_id]['youth'] = 1
 				    time.sleep(2)
-				    send_message(sender_id,"display youth job")
+				    send_message(sender_id,"youth placeholder")	
 				else:
-				    cache[sender_id]['youth'] = 0
+				    cache[sender_id]['youth'] = 0			
 				    time.sleep(2)
-				    send_message(sender_id, "display adult jobs")
+				    send_message(sender_id, "adult placeholder")		
 			    else:
 				send_message(sender_id,"Sorry I don't understand, are you looking for job services, financial support or something else?")	
 				log(cache[sender_id])
-#			elif cache[sender_id]['state'] == 1 "youth" not in cahce[sender_id].keys():
-#			    cache[sender_id]['state'] == 2
-#			    log(message_text)
-#			    if message_text.lower() == "youth":
-#			        cache[sender_id]["youth"] = 1
-#				send_quick_reply(sender_id,"What  gender do you identify with?", gender_replies)
-#			    elif message_text.lower() == "adult":
-#				cache[sender_id]["youth"] = 0
-#				send_quick_reply(sender_id,"What  gender do you identify with?", gender_replies)
-#			    else:
-#				send_message(sender_id, "hmm.. " + state)
-#			elif cache[sender_id]['state'] == 2:
-#			    cache['sender_id']['state'] == 3
-#			    send_message(sender_id,"Are you a member of the First Nations?")	
-#			else:
-#			    send_message(sender_id,str(cache[sender_id]))
 		    except Exception as e:
 			send_message(sender_id, "Sorry we are currently experiencing some difficulties, please call 555-555-5555 or email info@tbot.ca")
 			log(e.message)
