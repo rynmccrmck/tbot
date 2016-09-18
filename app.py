@@ -45,19 +45,19 @@ def webhook():
 		    try:
 		        if sender_id not in cache.keys():
 			    cache[sender_id] = {"purpose":-1,"youth":-1,"woman":-1,"current":0}
-			    time.sleep(2)
+			    time.sleep(4)
 			    log(cache[sender_id])
                             send_message(sender_id, welcome)
-			elif "restart" in message_text:
+			elif "restart" in message_text or message_text.lower() == "hi" or message_text.lower() == "hello":
 			    cache[sender_id] = {"purpose":-1,"youth":-1,"woman":-1,"current":0}
-			    time.sleep(2)
+			    time.sleep(4)
 			    log(cache[sender_id])
    			    send_message(sender_id, welcome)
 			else:
 			    if cache[sender_id]['purpose'] == -1:
 				if  ("job" in message_text or "employment" in message_text or "work" in message_text):  
    			            cache[sender_id]['purpose'] = 1
-			            time.sleep(2)
+			            time.sleep(4)
 				    log(cache[sender_id])
 			            send_quick_reply(sender_id,"Looking for employment services?",job_replies)
 				elif "food" in message_text or " eat" in message_text:
@@ -68,24 +68,23 @@ def webhook():
 			    elif cache[sender_id]['purpose'] == 1:
 				if "training" in message_text.lower():
 			            cache[sender_id]['purpose'] = 2
-				    time.sleep(2)
+				    time.sleep(4)
 			            log(cache[sender_id])
 				    send_quick_reply(sender_id, "There are numerous services available. Let's narrow it down.  Are you under 30?", youth_replies)
 				else:
 				    send_message(sender_id,"Job finding placeholder")
 				    cache[sender_id]['purpose'] = 3
-				    time.sleep(2)	
+				    time.sleep(4)	
 		            elif cache[sender_id]['purpose'] == 2 and cache[sender_id]['youth'] == -1:
 				if message_text.lower() == "yes":
 				    cache[sender_id]['youth'] = 1
-				    time.sleep(2)
+				    time.sleep(4)
 		                    r = requests.post('http://ec2-52-40-133-183.us-west-2.compute.amazonaws.com:1738/classify', {"data":'{"youth":1}'}) 
 				    adrian_data = json.loads("{" + r.json()[1:-1].replace("\n","") + "}")	
-				    send_message(sender_id,"youth placeholder")	
 				    youth_results(sender_id,"","")
 				else:
 				    cache[sender_id]['youth'] = 0			
-				    time.sleep(2)
+				    time.sleep(4)
 				    send_message(sender_id, "adult placeholder")		
 			    else:
 				send_message(sender_id,"Sorry I don't understand, are you looking for job services, financial support or something else?")	
