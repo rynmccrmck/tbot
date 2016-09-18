@@ -61,6 +61,7 @@ def webhook():
 				    send_message(sender_id, "placeholder food bank services")
 				else:
 				    send_message(sender_id, "Sorry I couldn't understand.")
+				    log(cache[sender_id])
 			    elif cache[sender_id]['purpose'] == "job":
 				if "training" in message_text.lower():
 			            cache[sender_id]['purpose'] = "PJT"
