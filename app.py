@@ -81,6 +81,7 @@ def webhook():
 				    send_message(sender_id, "display adult jobs")
 			    else:
 				send_message(sender_id,"Sorry I don't understand, are you looking for job services, financial support or something else?")	
+				log(cache[sender_id])
 #			elif cache[sender_id]['state'] == 1 "youth" not in cahce[sender_id].keys():
 #			    cache[sender_id]['state'] == 2
 #			    log(message_text)
