@@ -46,16 +46,19 @@ def webhook():
 		        if sender_id not in cache.keys():
 			    cache[sender_id] = {"purpose":-1,"youth":-1,"woman":-1,"current":0}
 			    time.sleep(2)
+			    log(cache[sender_id])
                             send_message(sender_id, welcome)
 			elif "restart" in message_text:
 			    cache[sender_id] = {"purpose":-1,"youth":-1,"woman":-1,"current":0}
 			    time.sleep(2)
+			    log(cache[sender_id])
    			    send_message(sender_id, welcome)
 			else:
 			    if cache[sender_id]['purpose'] == -1:
 				if  ("job" in message_text or "employment" in message_text or "work" in message_text):  
    			            cache[sender_id]['purpose'] == 1
 			            time.sleep(2)
+				    log[cache[sender_id]]
 			            send_quick_reply(sender_id,"Looking for employment services?",job_replies)
 				elif "food" in message_text or " eat" in message_text:
 				    send_message(sender_id, "placeholder food bank services")
@@ -66,6 +69,7 @@ def webhook():
 				if "training" in message_text.lower():
 			            cache[sender_id]['purpose'] = 2
 				    time.sleep(2)
+			            log(cache[sender_id])
 				    send_quick_reply(sender_id, "There are numerous services available. Let's narrow it down.  What is your age group?", age_replies)
 				else:
 				    send_message("Job finding placeholder")
