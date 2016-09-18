@@ -11,7 +11,7 @@ app = Flask(__name__)
 
 size = 1000
 cache = pylru.lrucache(size)
-wait = 5
+wait = 6
 
 
 @app.route('/', methods=['GET'])
