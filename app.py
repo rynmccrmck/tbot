@@ -52,21 +52,27 @@ def webhook():
 			    time.sleep(2)
    			    send_message(sender_id, welcome)
 			else:
-			    if cache[sender_id]['purpose'] == "na" and ("job" in message_text or "employment" in message_text):  
-			        cache[sender_id]["purpose"] == "job"
-			        time.sleep(2)
-			        send_quick_reply(sender_id,"Looking for employment services?",job_replies)
+			    if cache[sender_id]['purpose'] == "na":
+				if  ("job" in message_text or "employment" in message_text or "work" in message_text):  
+   			            cache[sender_id]["purpose"] == "job"
+			            time.sleep(2)
+			            send_quick_reply(sender_id,"Looking for employment services?",job_replies)
+				elif "food" in message_text or " eat" in message_text:
+				    send_message(sender_id, "placeholder food bank services")
+				else:
+				    send_message(sender_id, "Sorry I couldn't understand.")
 			    elif cache[sender_id]['purpose'] == "job":
 				if "training" in message_text.lower():
-				    send_quick_reply(sender_id, "There are numerous services available. Let's narrow it down.  What is your age group?", age_replies)
 			            cache[sender_id]['purpose'] = "PJT"
-		    	    	    time.sleep(2)
+				    time.sleep(2)
+				    send_quick_reply(sender_id, "There are numerous services available. Let's narrow it down.  What is your age group?", age_replies)
 				else:
 				    send_message("Job finding placeholder")
 				    cache[sender_id]['purpose'] = "JF"
 				    time.sleep(2)	
 		            elif cache[sender_id]['purpose'] == "PJT" and cache[sender_id]['youth'] == "na":
 				cache[sender_id]['youth'] = "asked"
+				time.sleep(2)
 				send_quick_reply(sender_id, "Are you under 30?", youth_replies)
 			    elif cache[sender_id]['youth'] == "asked":
 				if message_text.lower == "yes":
