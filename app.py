@@ -57,6 +57,10 @@ def webhook():
 				    send_quick_reply(sender_id, "There are numerous services available. Let's narrow it down.  What is your age group?", age_replies)
 			            cache[sender_id]['purpose'] = "PJT"
 		    	    	    time.sleep(2)
+				else:
+				    send_message("Job finding placeholder")
+				    cache[sender_id]['purpose'] = "JF"
+				    time.sleep(2)	
 		            elif cache[sender_id]['purpose'] == "PJT" and cache[sender_id]['youth'] == "na":
 				cache[sender_id]['youth'] = "asked"
 				send_quick_reply(sender_id, "Are you under 30?", youth_replies)
@@ -65,7 +69,8 @@ def webhook():
 				    send_message(sender_id,"display youth job")
 				else:
 				    send_message(sender_id, "display adult jobs")
-
+			    else:
+				send_message(sender_id,"Sorry I don't understand, are you looking for job services, financial support or something else?")	
 #			elif cache[sender_id]['state'] == 1 "youth" not in cahce[sender_id].keys():
 #			    cache[sender_id]['state'] == 2
 #			    log(message_text)
